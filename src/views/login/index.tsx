@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { enqueueSnackbar } from "notistack";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper/";
 import Box from "@mui/material/Box";
@@ -30,7 +31,7 @@ function Login() {
 						initialValues={{ username: "", password: "" }}
 						validationSchema={validationSchema}
 						onSubmit={(values) => {
-							console.log(values);
+							enqueueSnackbar(JSON.stringify(values));
 						}}
 					>
 						<Form>
@@ -41,7 +42,7 @@ function Login() {
 									label="Username"
 									placeholder="John Doe"
 								/>
-								<TextField name="password" label="Password" />
+								<TextField type="password" name="password" label="Password" />
 								<Button
 									fullWidth
 									type="submit"
