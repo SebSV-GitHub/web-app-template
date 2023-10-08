@@ -1,6 +1,5 @@
 {
-  "trailingComma": "es5",
-  "singleQuote": false,
-  "bracketSpacing": true,
-	"editorconfig": true
+	"trailingComma": "es5",
+	"singleQuote": false,
+	"bracketSpacing": true
 }

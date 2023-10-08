@@ -1,4 +1,4 @@
 {
-  "prettier": true,
-  "extends": "xo-react"
+	"prettier": true,
+	"extends": "xo-react"
 }
