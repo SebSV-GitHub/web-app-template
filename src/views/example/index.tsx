@@ -18,8 +18,6 @@ function Example() {
 	return (
 		<Box
 			sx={{
-				minHeight: "100vh",
-				backgroundColor: "rgb(243, 246, 249)",
 				display: "flex",
 				justifyContent: "center",
 				alignItems: "center",

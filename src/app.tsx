@@ -1,15 +1,16 @@
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Provider } from "react-redux";
+import { RouterProvider } from "react-router-dom";
 import store from "./state/store.js";
-import Example from "./views/example/example.js";
+import router from "./routes.js";
 
 function App() {
 	return (
 		<>
 			<CssBaseline />
 			<Provider store={store}>
-				<Example />
+				<RouterProvider router={router} />
 			</Provider>
 		</>
 	);
