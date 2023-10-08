@@ -1,7 +1,7 @@
 import React from "react";
 // eslint-disable-next-line n/file-extension-in-import
 import ReactDOM from "react-dom/client";
-import App from "./aapp.js";
+import App from "./app.js";
 
 ReactDOM.createRoot(document.querySelector("#root")!).render(
 	<React.StrictMode>
