@@ -1,8 +1,20 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import useAppSelector from "../../hooks/use-app-selector.js";
+import useAppDispatch from "../../hooks/use-app-dispatch.js";
+import { increment } from "../../state/slices/counter.js";
 
 function Example() {
+	const value = useAppSelector((state) => state.counter.value);
+	const dispatch = useAppDispatch();
+
+	const handleIncrement = () => {
+		dispatch(increment());
+	};
+
 	return (
 		<Box
 			sx={{
@@ -13,7 +25,13 @@ function Example() {
 				alignItems: "center",
 			}}
 		>
-			<Typography variant="h1">Example view</Typography>
+			<Stack spacing={3}>
+				<Typography variant="h1">Counter</Typography>
+				<Typography variant="h2" textAlign="center">
+					{value}
+				</Typography>
+				<Button onClick={handleIncrement}>Increment</Button>
+			</Stack>
 		</Box>
 	);
 }
