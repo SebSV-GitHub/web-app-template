@@ -8,10 +8,10 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import TextField from "../../shared/text-field.js";
+import TextField, { Format } from "../../shared/form/text-field.js";
 
 const validationSchema = Yup.object({
-	username: Yup.string().required(),
+	phone: Yup.string().required(),
 	password: Yup.string().required(),
 });
 
@@ -28,7 +28,7 @@ function Login() {
 			<Paper>
 				<Box p={3}>
 					<Formik
-						initialValues={{ username: "", password: "" }}
+						initialValues={{ phone: "", password: "" }}
 						validationSchema={validationSchema}
 						onSubmit={(values) => {
 							enqueueSnackbar(JSON.stringify(values));
@@ -38,11 +38,17 @@ function Login() {
 							<Stack spacing={2}>
 								<Typography variant="h2">Login</Typography>
 								<TextField
-									name="username"
-									label="Username"
-									placeholder="John Doe"
+									format={Format.Phone}
+									name="phone"
+									label="Phone"
+									placeholder="555 123 4567"
 								/>
-								<TextField type="password" name="password" label="Password" />
+								<TextField
+									format={Format.Text}
+									type="password"
+									name="password"
+									label="Password"
+								/>
 								<Button
 									fullWidth
 									type="submit"
