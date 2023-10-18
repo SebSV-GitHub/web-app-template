@@ -5,6 +5,7 @@ import Dashboard from "./layouts/dashboard/index.js";
 import NotFound from "./views/not-found/index.js";
 import Example from "./views/example/index.js";
 import Login from "./views/login/index.js";
+import ProtectedRoute from "./shared/router/protected-route.js";
 
 const router = createBrowserRouter([
 	{
@@ -12,18 +13,28 @@ const router = createBrowserRouter([
 		errorElement: <NotFound />,
 		children: [
 			{
-				path: "/",
-				element: <Dashboard />,
+				element: <ProtectedRoute isProtected redirect="/login" />,
 				children: [
 					{
-						index: true,
-						element: <Example />,
+						path: "/",
+						element: <Dashboard />,
+						children: [
+							{
+								index: true,
+								element: <Example />,
+							},
+						],
 					},
 				],
 			},
 			{
-				path: "/login",
-				element: <Login />,
+				element: <ProtectedRoute redirect="/" />,
+				children: [
+					{
+						path: "/login",
+						element: <Login />,
+					},
+				],
 			},
 		],
 	},

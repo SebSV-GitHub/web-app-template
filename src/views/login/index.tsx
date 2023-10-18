@@ -1,21 +1,35 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { enqueueSnackbar } from "notistack";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper/";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import TextField, { Format } from "../../shared/form/text-field.js";
+import { useAuthenticateMutation } from "../../services/api.js";
+import type Credentials from "../../types/credentials.js";
+import LoadingButton from "../../shared/loading-button.js";
+import useAppDispatch from "../../hooks/use-app-dispatch.js";
+import { setToken } from "../../state/slices/auth.js";
 
 const validationSchema = Yup.object({
-	phone: Yup.string().required(),
+	username: Yup.string().required(),
 	password: Yup.string().required(),
 });
 
 function Login() {
+	const dispatch = useAppDispatch();
+
+	const [authenticate, { isLoading }] = useAuthenticateMutation();
+
+	const handleSubmit = async (values: Credentials) => {
+		try {
+			const data = await authenticate(values).unwrap();
+			dispatch(setToken(data.token));
+		} catch {}
+	};
+
 	return (
 		<Container
 			sx={{
@@ -28,20 +42,18 @@ function Login() {
 			<Paper>
 				<Box p={3}>
 					<Formik
-						initialValues={{ phone: "", password: "" }}
+						initialValues={{ username: "", password: "" }}
 						validationSchema={validationSchema}
-						onSubmit={(values) => {
-							enqueueSnackbar(JSON.stringify(values));
-						}}
+						onSubmit={handleSubmit}
 					>
 						<Form>
 							<Stack spacing={2}>
 								<Typography variant="h2">Login</Typography>
 								<TextField
-									format={Format.Phone}
-									name="phone"
-									label="Phone"
-									placeholder="555 123 4567"
+									format={Format.Text}
+									name="username"
+									label="Username"
+									placeholder="johndoe"
 								/>
 								<TextField
 									format={Format.Text}
@@ -49,15 +61,16 @@ function Login() {
 									name="password"
 									label="Password"
 								/>
-								<Button
+								<LoadingButton
 									fullWidth
 									type="submit"
 									color="primary"
 									variant="contained"
 									size="large"
+									isLoading={isLoading}
 								>
 									Login
-								</Button>
+								</LoadingButton>
 							</Stack>
 						</Form>
 					</Formik>
