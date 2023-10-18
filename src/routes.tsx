@@ -3,9 +3,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Background from "./layouts/background.js";
 import Dashboard from "./layouts/dashboard/index.js";
 import NotFound from "./views/not-found/index.js";
-import Example from "./views/example/index.js";
 import Login from "./views/login/index.js";
 import ProtectedRoute from "./shared/router/protected-route.js";
+import Posts from "./views/posts/index.js";
 
 const router = createBrowserRouter([
 	{
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
 						children: [
 							{
 								index: true,
-								element: <Example />,
+								element: <Posts />,
 							},
 						],
 					},
