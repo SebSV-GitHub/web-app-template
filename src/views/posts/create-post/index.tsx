@@ -41,6 +41,7 @@ function CreatePost() {
 	return (
 		<>
 			<Button
+				fullWidth
 				disableElevation
 				color="primary"
 				variant="contained"
